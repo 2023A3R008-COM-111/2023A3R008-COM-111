@@ -5,7 +5,7 @@ typedef float Marks;
 int main()
 {
     Units batch1, batch2;
-	Marks student1_marks, student2_marks;
+	Marks studentx_marks, studentz_marks;
 
 	printf("Enter the number of units for batch 1: ");
 	scanf("%d", &batch1);
@@ -13,9 +13,9 @@ int main()
 	scanf("%d", &batch2);
 
 	printf("Enter the marks of student 1: ");
-	scanf("%f", &student1_marks);
+	scanf("%f", &studentx_marks);
 	printf("Enter the marks of student 2: ");
-	scanf("%f", &student2_marks);
+	scanf("%f", &studentz_marks);
 
 	printf("\nNumber for batch 1: %d\n", batch1);
 	printf("\nNumber for batch 2: %d\n", batch2);
