@@ -12,9 +12,9 @@ int main()
 	printf("Enter the number of units for batch 2: ");
 	scanf("%d", &batch2);
 
-	printf("Enter the marks of student 1: ");
+	printf("Enter the marks of student x: ");
 	scanf("%f", &studentx_marks);
-	printf("Enter the marks of student 2: ");
+	printf("Enter the marks of student z: ");
 	scanf("%f", &studentz_marks);
 
 	printf("\nNumber for batch 1: %d\n", batch1);
