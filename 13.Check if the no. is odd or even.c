@@ -1,12 +1,12 @@
 #include<stdio.h>
 int main()
 {
-    int a;
+    int x;
 
-printf("enter the value of a: ");
-scanf("%d",&a);
+printf("enter the value of x: ");
+scanf("%d",&x);
 
- if(a%2==0)
+ if(x%2==0)
 {
    printf("the answer is even: ");
 }
