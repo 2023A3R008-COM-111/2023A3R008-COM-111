@@ -2,12 +2,12 @@
 #include<math.h>
 int main ()
 {
-    float Temperature;
+    float Temp;
  //Enter the value of temperature
  printf("Enter the value of temperature");
- scanf("%f", &Temperature);
+ scanf("%f", &Temp);
 
-     if (Temperature<20)
+     if (Temp<20)
      {
              printf("The weather is cold today");
      }
