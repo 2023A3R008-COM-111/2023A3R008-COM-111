@@ -2,15 +2,15 @@
 int main ()
 
  {
-     int a,b,c,d;
+     int x, y, z, t;
      float ratio;
     printf ("Enter the values of integers");
-     scanf("%d %d %d %d", &a,&b,&c,&d);
+     scanf("%d %d %d %d", &x,&y,&z,&t);
 
-     if (c-d!=0)
+     if (z-t!=0)
 
      {
-         ratio =(float)(a+b)/(float)(c-d);
+         ratio =(float)(x+y)/(float)(z-t);
          printf("ratio=%f\n",ratio);
      }
      else
