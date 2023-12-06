@@ -2,12 +2,12 @@
 int main ()
 
 {
-    int marks ;
+    int mrks ;
 char grade;
     printf("Enter the student's marks: ");
-    scanf("%d", &marks);
+    scanf("%d", &mrks);
 
-    int index = marks /10;
+    int index = mrks /10;
     switch(index)
     {
         case 10:
