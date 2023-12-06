@@ -19,8 +19,8 @@ int main()
 
 	printf("\nNumber for batch 1: %d\n", batch1);
 	printf("\nNumber for batch 2: %d\n", batch2);
-	printf("\nMarks of Student A: %.2f\n", student1_marks);
-	printf("\nMarks of Student B: %.2f\n", student2_marks);
+	printf("\nMarks of Student A: %.2f\n", studentx_marks);
+	printf("\nMarks of Student B: %.2f\n", studentz_marks);
 	return 0;
 }
     
