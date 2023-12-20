@@ -6,7 +6,7 @@ int main ()
 int num, originalnum, remainder, result = 0, n = 0 ;  
 printf ( " Please enter an integer: " );
 scanf ("%d", &num);
-originalnum = n;
+originalnum = num;
 while (originalnum != 0)
 {
 originalnum = originalnum / 10;
