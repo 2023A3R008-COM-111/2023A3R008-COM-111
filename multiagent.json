@@ -1,0 +1,401 @@
+{
+  "name": "multiagent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4",
+          "mode": "list",
+          "cachedResultName": "Customer Feedback Form  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1446651626,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4/edit#gid=1446651626"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "97ed98ab-876e-41d5-92e7-ffcf37711e1e",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "ThVIkoPDhxgaX09a",
+          "name": "Google Sheets Trigger account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and map the feedback to 'feedbackText'\nconst newItems = [];\n\nfor (const item of $input.all()) {\n  const row = item.json;\n\n  // Extract the feedback text using the exact column name\n  const feedback = row[\"Please share your feedback\"];\n\n  newItems.push({\n    json: {\n      feedbackText: feedback\n    }\n  });\n}\n\nreturn newItems;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e1c90cad-1c06-4d42-a01c-d2237102cc56",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ls2wFUObGcOOMdAo",
+          "mode": "list",
+          "cachedResultName": "Sentiment Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        16
+      ],
+      "id": "bd24339f-3679-4abf-b06e-9c48e2172e0e",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "XuoZliqPZontvV7d",
+          "mode": "list",
+          "cachedResultName": "Key Problem Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        208
+      ],
+      "id": "cabb4be2-606f-46a3-bcf7-b8b613d4e265",
+      "name": "Execute Workflow1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "FUOZ8rhqbq9gCWXE",
+          "mode": "list",
+          "cachedResultName": "Suggested Action Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        -160
+      ],
+      "id": "809e8a99-61db-43d5-b9b2-2d0a2cc0888b",
+      "name": "Execute Workflow2"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 3,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        752,
+        -48
+      ],
+      "id": "6566a89e-bed9-4515-9ed5-f3cd741f62ad",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4",
+          "mode": "list",
+          "cachedResultName": "Customer Feedback Form  (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1446651626,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-XM4qJ1PCzetMv5Ur_z_CeaDRGSikL0dDTkqFGBBWo4/edit#gid=1446651626"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Sentiment": "={{ $json.Sentiment }}",
+            "Timestamp": "={{ $json.Timestamp }}",
+            "Key Problem": "={{ $json.KeyProblem }}",
+            "Suggested Action": "={{ $json.SuggestedAction }}",
+            "row_number": 2
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "  Name  ",
+              "displayName": "  Name  ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Please share your feedback",
+              "displayName": "Please share your feedback",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sentiment",
+              "displayName": "Sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Key Problem",
+              "displayName": "Key Problem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Suggested Action",
+              "displayName": "Suggested Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1408,
+        -64
+      ],
+      "id": "6655cb13-a5a2-4dde-b1fe-cc99dd32ac16",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "80CSMQ3BWPnk2bJq",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      row_number: 4,\n      Timestamp: \"8/1/2025 16:56:32\",\n      Sentiment: \"Neutral\",\n      KeyProblem: \"Too expensive\",\n      SuggestedAction: \"Offer a discount\"\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        976,
+        -32
+      ],
+      "id": "6dc0344e-a3ae-4e6f-9568-767c8d1b780e",
+      "name": "Code1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Workflow2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Workflow2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "431b592b-bb88-4db8-b335-955411b3d8cc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ac55c6d19288fbed9c3eeebcba6d12c2052b0c3dd79bbcf7e68b6f5d8b841f2c"
+  },
+  "id": "tpwR0XNhx5YabCQi",
+  "tags": []
+}
